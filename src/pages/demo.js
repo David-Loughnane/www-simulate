@@ -18,6 +18,7 @@ module.exports = (h) => {
 
   var stats = { }
   var stats_panel = draw_stats()
+  var set = {}
 
   function draw_stats() {
 
@@ -62,6 +63,7 @@ module.exports = (h) => {
  
     
   var start = () => {
+    clearInterval(set)
     stats = {}
     var data = get_data()
     var container = document.querySelector('#vis')
@@ -80,7 +82,7 @@ module.exports = (h) => {
     })
     document.querySelector('#start').innerText = 'Restart'
     document.querySelector('#demo').insertBefore(node_data, container)
-    setInterval(update, 300)
+    set = setInterval(update, 300)
   }
   
   var draw_section = (d, section) => {
@@ -107,10 +109,12 @@ module.exports = (h) => {
   } 
 
   var options = [
-    {value: 'pop_neighbour_dyn', name: 'Hello'}
-  , {value: 'pop_neighbour_stat', name: 'Simple'}
-  , {value: 'pop_neighbour_t_dyn', name: 'Acceptance Threshold'}
-  , {value: 'pop_neighbour_t_stat', name: 'No Suggestion'}
+    {value: 'pop_neighbour_dyn', name: 'Neighbour Suggestion, Dynamic Threshold'}
+  , {value: 'pop_neighbour_stat', name: 'Neighbour Suggestion, Static Threshold'}
+  , {value: 'pop_neighbour_t_dyn', name: 'Neighbour Suggestion, Dynamic Threshold, Neghbours can reject'}
+  , {value: 'pop_neighbour_t_stat', name: 'Neighbour Suggestion, Static Threshold, Neghbours can reject'}
+  , {value: 'pop_self_stat', name: 'Self Caching, Static Threshold'}
+  , {value: 'pop_self_stat', name: 'Self Caching, Dynamic Threshold'}
   ]
 
   var draw_node_data = d => {
