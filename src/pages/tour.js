@@ -14,7 +14,7 @@ const data = {
 
 module.exports = (h) => {
   
-  var event_queue, network, caption, node_data
+  var event_queue, network, caption, pop_table, node_data
 
   // return network and event data corresponding to selected algorithm 
   var get_data = () => {
@@ -47,7 +47,8 @@ module.exports = (h) => {
     document.querySelector('#start').innerText = 'Restart'
     caption = draw_caption()
     document.querySelector('#tour').insertBefore(node_data, container)
-    container.appendChild(caption)
+    container.appendChild(caption) 
+    pop_table = draw_pop_table()
   }
   
   var update = () => {
@@ -56,6 +57,7 @@ module.exports = (h) => {
 
     interval = setInterval(() => {
       network.update(ev)
+      draw_pop_table(ev.pop_table)
       h.update(caption, draw_caption(ev.caption))
       last_type = ev.type === 'request' ? 'request_hop' 
             : ev.type === 'server_hit' ? 'content_hop'
@@ -68,6 +70,15 @@ module.exports = (h) => {
       }
     }, 500)
   }
+  var draw_pop_table = k => {
+      if(k){
+	  console.log(k)	  
+	  document.querySelector('#pop_table').innerHTML = k
+	  return 
+      }
+      console.log("no pop_table!")
+      return
+  } 
  
   var draw_caption = m => {
     if (m) {
@@ -137,7 +148,8 @@ module.exports = (h) => {
       <button onclick=${ update }>Next ${'>'}</button>
       </div>
       ${drop_down(h)}
+      <div id='pop_table'></div>
       <div id='vis'></div>
     </div>
-  `
+  ` 
 }
