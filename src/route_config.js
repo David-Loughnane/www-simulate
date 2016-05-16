@@ -4,12 +4,12 @@ module.exports = {
   , description: 'Go back home'
   }
 , '/tour': {
-    title: 'Tour'
-  , description: 'Have a tour of the algorithm'
+    title: 'Tutorial'
+  , description: 'Go step by step through an example of how our algorithms operate'
   }
 , '/demo': {
-    title: 'Demo'
-  , description: 'View a simulation of the algorithm'
+    title: 'Simulation'
+  , description: 'See algorithms in action on a larger scale using an example network'
   }
 , '/about': {
     title: 'About'
