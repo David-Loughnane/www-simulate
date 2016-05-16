@@ -202,11 +202,11 @@ select {
   height: 100%;
   width: 100%;
   border: none;
-  background-color: #e19a75;
+  background-color: #00688B;
 }
 
 .about .menu li button:hover {
-  background-color: #e17586;
+  background-color: #75bce1;
 }
 
 .about .menu li button.active {
