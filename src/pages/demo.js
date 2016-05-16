@@ -18,7 +18,8 @@ module.exports = (h) => {
 
   var stats = { }
   var stats_panel = draw_stats()
-  var set = {}
+  var set, is_paused = false
+  var pause_button
 
   function draw_stats() {
 
@@ -121,8 +122,8 @@ module.exports = (h) => {
     if (d && ['cache','requests','content'].some(s => d[s].length)) {
       return h`<div id='node_data'>
         <ul>
-          ${draw_section(d, 'cache')}  
-          ${draw_section(d, 'requests')}  
+          ${draw_section(d, 'cache')}
+          ${draw_section(d, 'requests')}
           ${draw_section(d, 'content')}  
         </ul> 
       </div>` 
@@ -150,10 +151,33 @@ module.exports = (h) => {
     network.update(ev)
   }
   
+  var pause = () => {
+    is_paused = true
+    clearInterval(set)
+    h.update(pause_button, draw_pause_button())
+  }
+
+  var unpause = () => {
+    is_paused = false
+    set = setInterval(update, 300)
+    h.update(pause_button, draw_pause_button())
+  }
+
+  var draw_pause_button = () => {
+    if (is_paused) {
+      return h`<button id='pause' onclick=${ unpause }>Unpause</button>`
+    } else {
+      return h`<button id='pause' onclick=${ pause }>Pause</button>`
+    }
+  }
+
+  pause_button = draw_pause_button()
+ 
   return h`
     <div id='demo'>
       <div class='vis-ctl'>
         <button id='start' onclick=${ start }>Start</button>
+        ${ pause_button }
       </div>
       ${drop_down(h)}
       <div id='vis'></div>

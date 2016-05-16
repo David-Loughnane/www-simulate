@@ -19,6 +19,8 @@ module.exports = (h, store) => {
   var networks = {}, containers = {}, data = {}, started = false
   var stats = { 'left': {}, 'right': {} }
   var stats_panel = draw_stats()
+  var pause_button, is_paused = false
+  var set
 
   function update_stats(panel, event) {
     stats[panel][event.type] = !stats[panel][event.type] ? 1 
@@ -28,9 +30,7 @@ module.exports = (h, store) => {
 
   function single_stat(name, val) {
     if (val) {
-	if(val%1 != 0){
-	    val = val.toFixed(3);
-	}
+	    if(val%1 != 0) val = val.toFixed(3)
       return h`
         <p><strong>${name}: </strong>${val} </p>
       `
@@ -38,6 +38,7 @@ module.exports = (h, store) => {
       return h``
     }
   }
+
   function single_stats_panel (panel) {
   
     var s = stats[panel]
@@ -78,7 +79,7 @@ module.exports = (h, store) => {
     stats = { 'left': {}, 'right': {} }
     h.update(stats_panel, draw_stats())
     if (!started) {
-      setInterval(update, 150) 
+      set = setInterval(update, 150) 
       started = true
     } else {
       if (containers['left']) containers['left'] = create_network('left')
@@ -125,10 +126,33 @@ module.exports = (h, store) => {
     </div>`
   }
 
+  var pause = () => {
+    is_paused = true
+    clearInterval(set)
+    h.update(pause_button, draw_pause_button())
+  }
+
+  var unpause = () => {
+    is_paused = false
+    set = setInterval(update, 150) 
+    h.update(pause_button, draw_pause_button())
+  }
+
+  var draw_pause_button = () => {
+    if (is_paused) {
+      return h`<button id='pause' onclick=${ unpause }>Unpause</button>`
+    } else {
+      return h`<button id='pause' onclick=${ pause }>Pause</button>`
+    }
+  }
+
+  pause_button = draw_pause_button()
+
   return h`
     <div class='compare'>
       <div class='vis-ctl'>
         <button id='start' onclick=${start}>Start</button>
+        ${ pause_button }
       </div>
       ${draw_panel(h, 'left')} 
       ${draw_panel(h, 'right')} 

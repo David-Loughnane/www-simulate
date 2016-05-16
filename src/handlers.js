@@ -8,9 +8,9 @@ function find_node (name, canvas) {
   })
 }
 
-var ORIGINAL_SIZE = 10
-var TEMP_RESIZE = 16
-var TERMINAL_RESIZE = 14
+var ORIGINAL_SIZE = 8
+var TEMP_RESIZE = 14
+var TERMINAL_RESIZE = 10
 
 
 module.exports = {
