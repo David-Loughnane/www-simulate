@@ -52,7 +52,7 @@ module.exports = {
   element: '#vis'
 , charge: -300
 , friction: 100
-, linkDistance: 40
+, linkDistance: 15
 , height: height
 , width: width
 , r: r
@@ -75,31 +75,13 @@ module.exports = {
       return 'dodgerblue'
     }
     return 'yellow'
-    //return color(node.type)
-    /*
-    if (node.requests.length > 0) {
-      return request_colors(node.requests[0])
-    } else if (node.content.length > 0) {
-      return response_colors(node.content[0])
-    } else {
-      //default node color
-      console.log(node.type)
-      return 'blue' 
-    
-    }*/
   }
-, node_size(node) {
-    return ((node.cache.length *5)+10).toString()
-  }
+, node_size: 8
 , tick(nodes, edges) {
     edges.attr('x1', function(d) { return d.source.x })
       .attr('y1', function(d) { return d.source.y })
       .attr('x2', function(d) { return d.target.x })
       .attr('y2', function(d) { return d.target.y })
-    /*
-    nodes.attr('cx', function(d) { return d.x })
-      .attr('cy', function(d) { return d.y })
-    */
   
     nodes.attr('cx', function(d) { return d.x = Math.max(r, Math.min(width - r, d.x)); })
         .attr('cy', function(d) { return d.y = Math.max(r, Math.min(height - r, d.y)); });
