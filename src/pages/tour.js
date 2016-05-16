@@ -14,7 +14,7 @@ const data = {
 
 module.exports = (h) => {
   
-  var event_queue, network, caption, node_data
+  var event_queue, network, caption, pop_table, node_data
 
   // return network and event data corresponding to selected algorithm 
   var get_data = () => {
@@ -46,7 +46,9 @@ module.exports = (h) => {
     })
     document.querySelector('#start').innerText = 'Restart'
     caption = draw_caption()
+    pop_table = draw_pop_table() 
     document.querySelector('#tour').insertBefore(node_data, container)
+    container.appendChild(pop_table)
     container.appendChild(caption)
   }
   
@@ -57,6 +59,7 @@ module.exports = (h) => {
     console.log(ev)
     interval = setInterval(() => {
       network.update(ev)
+      h.update(pop_table, draw_pop_table(ev.pop_table))
       h.update(caption, draw_caption(ev.caption))
       ev = event_queue.pop() 
       if (ev && continue_evs.indexOf(ev.type) < 0) {
@@ -66,6 +69,16 @@ module.exports = (h) => {
       }
     }, 500)
   }
+  var draw_pop_table = k => {
+      if(k){
+	  var el = document.createElement('html');
+	  el.innerHTML = k 
+	  console.log(el)	  
+	  return h`<div id="pop_table"><div id="pop_wrap"><p>${el}</p></div></div>` 
+      }
+      console.log("no pop_table!")
+      return h`<div></div>`
+  } 
  
   var draw_caption = m => {
     if (m) {
@@ -130,12 +143,12 @@ module.exports = (h) => {
 
   return h`
     <div id='tour'>
-      <div class='vis-ctl'>
-      <button id='start' onclick=${ start }>Start</button>
-      <button onclick=${ update }>Next ${'>'}</button>
-      </div>
-      ${drop_down(h)}
-      <div id='vis'></div>
+	<div class='vis-ctl'>
+	<button id='start' onclick=${ start }>Start</button>
+	<button onclick=${ update }>Next ${'>'}</button>
+	</div>
+	${drop_down(h)} 
+	<div id='vis'></div> 
     </div>
-  `
-}
+  ` 
+} 

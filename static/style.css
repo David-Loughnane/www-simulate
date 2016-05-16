@@ -128,13 +128,26 @@ div#caption {
   background-color: #888cFF;
   
   text-align: center;
-  
+  float: right;
   position: relative;
-  bottom: 7em;
   margin: 0 auto;
   padding: 1em;
+  margin-left: 1em;
   min-width: 10em;
   max-width: 20em;
+}
+
+div#pop_table{
+  background-color: #888cFF;
+  position: relative;
+  padding: 1em;
+  min-width: 15em;
+  max-width: 25em;
+  float:left;
+}
+
+div#pop_wrap *{
+  background-color: #888cFF;
 }
 
 div#node_data {
