@@ -28,6 +28,9 @@ module.exports = (h, store) => {
 
   function single_stat(name, val) {
     if (val) {
+	if(val%1 != 0){
+	    val = val.toFixed(3);
+	}
       return h`
         <p><strong>${name}: </strong>${val} </p>
       `
@@ -81,6 +84,8 @@ module.exports = (h, store) => {
       if (containers['left']) containers['left'] = create_network('left')
       if (containers['right']) containers['right'] = create_network('right')
     }
+    document.querySelector('#start').innerText = 'Restart'
+
   }
   
   var update = () => {
@@ -104,12 +109,12 @@ module.exports = (h, store) => {
   var drop_down = (h, id) => {
     return h`<select onchange=${change_algo(id)} id=${id+'_algo'}>
       <option selected='true' disabled='disabled'>Choose algorithm</option>
-      <option value='pop_neighbour_dyn'>PopNeighDyn</option>
-      <option value='pop_neighbour_stat'>PopNeighStat</option>
-      <option value='pop_neighbour_t_dyn'>PopNeighTDyn</option>
-      <option value='pop_neighbour_t_stat'>PopNeighTStat</option>
-      <option value='pop_self_dyn'>PopSelfDyn</option>
-      <option value='pop_self_stat'>PopSelfStat</option>
+      <option value='pop_neighbour_dyn'>Neighbour Suggestion, Dynamic Threshold</option>
+      <option value='pop_neighbour_stat'>Neighbour Suggestion, Static Threshold</option>
+      <option value='pop_neighbour_t_dyn'>Neighbour Suggestion, Dynamic Threshold, Neghbours can reject</option>
+      <option value='pop_neighbour_t_stat'>Neighbour Suggestion, Static Threshold, Neghbours can reject</option>
+      <option value='pop_self_dyn'>Self Caching, Dynamic Threshold</option>
+      <option value='pop_self_stat'>Self Caching, Static Threshold</option>
     </select>`
   }
 
@@ -123,7 +128,7 @@ module.exports = (h, store) => {
   return h`
     <div class='compare'>
       <div class='vis-ctl'>
-        <button onclick=${start}>Start</button>
+        <button id='start' onclick=${start}>Start</button>
       </div>
       ${draw_panel(h, 'left')} 
       ${draw_panel(h, 'right')} 
