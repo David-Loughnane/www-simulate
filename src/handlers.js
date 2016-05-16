@@ -142,7 +142,7 @@ module.exports = {
     .transition()
       .delay(500)
       .duration(500)
-      .style('fill', 'grey')      
+      .style('fill', 'fuchsia')      
       .attr('r', TERMINAL_RESIZE)  
   }
 , 'server_hit': (ev, nodes, edges, network) => {
