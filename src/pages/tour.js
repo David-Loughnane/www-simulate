@@ -52,18 +52,16 @@ module.exports = (h) => {
   }
   
   var update = () => {
+    var continue_evs = ['request', 'request_hop', 'cache_lookup_failed', 'content_hop']
     var interval, last_type
     var ev = event_queue.pop()
-
+    console.log(ev)
     interval = setInterval(() => {
       network.update(ev)
       draw_pop_table(ev.pop_table)
       h.update(caption, draw_caption(ev.caption))
-      last_type = ev.type === 'request' ? 'request_hop' 
-            : ev.type === 'server_hit' ? 'content_hop'
-            : ev.type
       ev = event_queue.pop() 
-      if (!ev || ev.type !== last_type) {
+      if (ev && continue_evs.indexOf(ev.type) < 0) {
         clearInterval(interval)
         if (!ev) return
         else event_queue.push(ev)
@@ -140,7 +138,7 @@ module.exports = (h) => {
       </option>`)}
     </select>`
   }
-  
+
   return h`
     <div id='tour'>
       <div class='vis-ctl'>
