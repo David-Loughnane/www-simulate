@@ -27,7 +27,7 @@ module.exports = (h) => {
     var cache_hit = stats['cache_hit']/stats['server_hit']
 
     return h`
-      <div id='stats'>
+      <div id='stats_panel_sim'>
         ${draw_single_stat('Hops',stats['request_hop'])}
         ${draw_single_stat('Requests',stats['request'])}
         ${draw_single_stat('Avg hops/request', avg_hops_per_request)}
@@ -35,7 +35,7 @@ module.exports = (h) => {
         ${draw_single_stat('Server hits',stats['server_hit'])}
         ${draw_single_stat('Cache hits/Server hits', cache_hit)}
       </div>
-    `
+    ` 
   }
 
   function draw_single_stat(name, val) {
@@ -121,11 +121,11 @@ module.exports = (h) => {
   var draw_node_data = d => {
     if (d && ['cache','requests','content'].some(s => d[s].length)) {
       return h`<div id='node_data'>
-        <ul>
+        <h4> 
           ${draw_section(d, 'cache')}
           ${draw_section(d, 'requests')}
           ${draw_section(d, 'content')}  
-        </ul> 
+        </h4> 
       </div>` 
     }
     return h`<div></div>`

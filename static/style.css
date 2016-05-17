@@ -52,10 +52,13 @@ div.vis-ctl {
 }
 
 div.vis-ctl button {
-  background-color: #00688B;
+  background-color: #D0D0F2;
   border: none;
-  padding: 1em;
+  padding: .5em;
   width: 45%;
+  font-weight: bold;
+  font-size: 1.2em;
+
 }
 
 div#home h1#title {
@@ -215,7 +218,7 @@ select {
   height: 100%;
   width: 100%;
   border: none;
-  background-color: #00688B;
+  background-color: #D0D0F2;
 }
 
 .about .menu li button:hover {
@@ -234,10 +237,16 @@ select {
 
 .about .section .title {
   text-align: center;
-}
+} 
 
 .stats_panel {
   clear: both;
+  text-align: center;
+}
+
+div#stats_panel_sim {
+  text-align: center;
+  font-size: 1em;
 }
 
 .stats_panel .single_stats_panel {
