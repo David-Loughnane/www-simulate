@@ -1,0 +1,276 @@
+* {
+  box-sizing: border-box;  
+  font-family: 'Roboto Mono', Inconsolata, Consolas, monospace;
+}
+
+rect.overlay {
+	fill: white;	
+}
+
+body {
+  background-color: #eee;
+}
+
+h1#title {
+  text-align: center;  
+  font-size: 3em;
+}
+
+ul#navigation {
+  padding: 0;
+  display: flex;
+  width: 50%;
+  margin: auto;
+  justify-content: space-between;
+}
+
+ul#navigation li {
+  list-style: none;
+  background-color: #ADD8E6;
+  border-radius: 2%;
+  margin-right: 2%;
+}
+
+ul#navigation li:hover {
+  background-color: #0068FF
+}
+
+ul#navigation li a {
+  text-decoration: none;
+  padding: 0.8em 1.7em;
+  font-size: 1.1em;
+  color: black;
+  display: block;
+}
+
+div#vis {
+  margin: auto;
+  width: 900px;
+}
+
+div.vis-ctl {
+  display: flex;
+  width: 20%;
+  margin: 1em auto 0;
+  justify-content: space-around;
+}
+
+div.vis-ctl button {
+  background-color: #D0D0F2;
+  border: none;
+  padding: .5em;
+  width: 45%;
+  font-weight: bold;
+  font-size: 1.2em;
+
+}
+
+div#home h1#title {
+  font-size: 4em;
+  margin-bottom: 0.2em;
+  margin-top: 3%;
+}
+
+div#home ul#navigation {
+  flex-direction: column;
+  float: left;
+  margin-left: 10%;
+}
+
+div#home ul#navigation li {
+  width: 11em;
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+div#home ul#navigation li a {
+  font-weight: bold;
+  font-size: 1.2em;
+  padding-top: 0.8em;
+  padding-bottom: 0.8em;
+}
+
+ul#navigation #description {
+  display: none;
+  position: absolute;
+  left: 40%;
+  top: 30%;
+ 
+  background-color: white;
+  width: 25%;
+  height: 25%;
+  padding: 1em;
+}
+
+div#home ul#navigation a:hover + #description {
+  display: initial;
+}
+
+/*
+.solid {
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.4);
+}
+*/
+
+div#background {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: -2;
+}
+
+div.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: -1;
+  background-color: rgba(240,240,240,0.6);
+}
+
+div#caption {
+  background-color: #888cFF;
+  
+  text-align: center;
+  float: right;
+  position: relative;
+  margin: 0 auto;
+  padding: 1em;
+  margin-left: 1em;
+  min-width: 10em;
+  max-width: 20em;
+}
+
+div#pop_table{
+  background-color: #888cFF;
+  position: relative;
+  padding: 1em;
+  min-width: 15em;
+  max-width: 25em;
+  float:left;
+}
+
+div#pop_wrap *{
+  background-color: #888cFF;
+}
+
+div#node_data {
+  float: left;
+  margin: 0 auto;
+  display: inline-block; 
+  margin-left: 2em;
+}
+div#node_data h4 {
+  text-align: center; 
+}
+div#node_data ul {
+  padding: 0;
+  display: inline-block;
+}
+div#node_data li {
+  list-style: none;
+}
+
+.edge {
+  stroke: black;
+  stroke-width: 10;
+}
+
+.node {
+  stroke-width: 3;
+  stroke: black;
+}
+
+.compare .panel {
+  width: 50%;
+  float: left;
+}
+
+select {
+  margin-top: 3em;
+  background-color: #ADD8E6;
+  
+  text-align: center;
+  bottom: 7em;
+  margin: 1em;
+  padding: 1em;
+  min-width: 10em;
+  max-width: 20em;
+	
+}
+
+.about .menu {
+  float: left;
+}
+
+.about .menu ul {
+  padding: 0;
+}
+
+.about .menu li {
+  list-style: none;
+  margin-top: 3em;
+  margin-left: 2em;
+  height: 3em;
+  width: 10em;
+}
+
+.about .menu li button {
+  height: 100%;
+  width: 100%;
+  border: none;
+  background-color: #D0D0F2;
+}
+
+.about .menu li button:hover {
+  background-color: #75bce1;
+}
+
+.about .menu li button.active {
+  background-color: #75bce1;
+}
+
+.about .section {
+  padding-top: 2em;
+  width: 50%;
+  margin: auto;
+}
+
+.about .section .title {
+  text-align: center;
+} 
+
+.stats_panel {
+  clear: both;
+  text-align: center;
+}
+
+div#stats_panel_sim {
+  text-align: center;
+  font-size: 1em;
+}
+
+.stats_panel .single_stats_panel {
+  width: 45%;
+  display: inline-block;
+  overflow-y: scroll;
+  max-height: 10em;
+  margin-top: 9px;
+  margin-bottom: 9px;
+  text-align: center;
+}
+
+.stats_panel .single_stats_panel p {
+  margin: 0;
+}
+
+.stats_panel .single_stats_panel#left_stats {
+  float: left;
+}
+
+.stats_panel .single_stats_panel#right_stats {
+  float: right;
+}

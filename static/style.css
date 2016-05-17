@@ -3,6 +3,10 @@
   font-family: 'Roboto Mono', Inconsolata, Consolas, monospace;
 }
 
+rect.overlay {
+	fill: #eee;	
+}
+
 body {
   background-color: #eee;
 }
