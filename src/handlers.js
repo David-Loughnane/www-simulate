@@ -145,6 +145,27 @@ module.exports = {
       .style('fill', 'fuchsia')      
       .attr('r', TERMINAL_RESIZE)  
   }
+, 'reject_suggest': (ev, nodes, edges, network) => {
+ 
+    var node = nodes.filter(n => {
+      return n.name.toString() === ev.node.toString()  
+    })[0]
+    if (!node) return
+    
+    node.cache = node.cache.filter(c => {
+      return c.id !== ev.data_ID  
+    })
+    find_node(node.name, network.canvas)
+    .transition()
+      .duration(500)
+      .style('fill', 'black')
+      .attr('r', TEMP_RESIZE)    
+    .transition()
+      .delay(500)
+      .duration(500)
+      .style('fill', 'grey')      
+      .attr('r', TERMINAL_RESIZE)  
+  }  
 , 'server_hit': (ev, nodes, edges, network) => {
 
     var node = nodes.filter(n => {
